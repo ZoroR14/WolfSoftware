@@ -58,15 +58,15 @@ class PruebaController extends Controller
         return $this->render("view", ["model" => $model]);
     }
   
-       
-   }
-
- /* Prueba del domingo
+    // Prueba del domingo //
     public function actionIndex()
     {
-        return $this->render('index', ['nombre'=>"Orlando",]
+        return $this->render('index', ['mensaje_bienvenida'=>"Este es el inicio del proyecto"]
                 );
     }
+   }
+
+
     
-}
-*/
+
+
