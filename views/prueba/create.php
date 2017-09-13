@@ -1,7 +1,10 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 ?>
+
+<a href="<?=Url::toRoute("prueba/view")?>">Aqui te dirijes a la vista "View"</a>
 
 <h1>Crear Alumno</h1>
 <h3><?= $msg ?></h3>

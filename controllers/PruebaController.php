@@ -50,6 +50,12 @@ class PruebaController extends Controller
         }
         return $this->render("create", ['model' => $model, 'msg' => $msg]);
     }
+    
+    
+    public function actionView() {
+        
+        return $this->render("view");
+    }
   
        
    }
