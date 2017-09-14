@@ -20,6 +20,74 @@ use yii\helpers\Url;
 
 class PruebaController extends Controller
 {
+        public function actionUpdate()
+    {
+        $model = new FormAlumnos;
+        $msg = null;
+        
+        if($model->load(Yii::$app->request->post()))
+        {
+            if($model->validate())
+            {
+                $table = Alumnos::findOne($model->id_alumnos);
+                if($table)
+                {
+                    $table->nombres = $model->nombres;
+                    $table->apellidos = $model->apellidos;
+                    $table->clase = $model->clase;
+                    $table->nota_final = $model->nota_final;
+                    if ($table->update())
+                    {
+                        $msg = "El Alumno ha sido actualizado correctamente";
+                    }
+                    else
+                    {
+                        $msg = "El Alumno no ha podido ser actualizado";
+                    }
+                }
+                else
+                {
+                    $msg = "El alumno seleccionado no ha sido encontrado";
+                }
+            }
+            else
+            {
+                $model->getErrors();
+            }
+        }
+        
+        
+        if (Yii::$app->request->get("id_alumnos"))
+        {
+            $id_alumnos = Html::encode($_GET["id_alumnos"]);
+            if ((int) $id_alumnos)
+            {
+                $table = Alumnos::findOne($id_alumnos);
+                if($table)
+                {
+                    $model->id_alumnos = $table->id_alumnos;
+                    $model->nombres = $table->nombres;
+                    $model->apellidos = $table->apellidos;
+                    $model->clase = $table->clase;
+                    $model->nota_final = $table->nota_final;
+                }
+                else
+                {
+                    return $this->redirect(["prueba/view"]);
+                }
+            }
+            else
+            {
+                return $this->redirect(["prueba/view"]);
+            }
+        }
+        else
+        {
+            return $this->redirect(["prueba/view"]);
+        }
+        return $this->render("update", ["model" => $model, "msg" => $msg]);
+    }
+    
     public function actionDelete()
     {
         if(Yii::$app->request->post())

@@ -43,7 +43,7 @@ use yii\widgets\ActiveForm;
         <td><?= $row->apellidos ?></td>
         <td><?= $row->clase ?></td>
         <td><?= $row->nota_final ?></td>
-        <td><a href="#">Editar</a></td>
+        <td><a href="<?= Url::toRoute(["prueba/update", "id_alumnos" => $row->id_alumnos]) ?>">Editar</a></td>
         <td>
             <a href="#" data-toggle="modal" data-target="#id_alumnos_<?= $row->id_alumnos ?>">Eliminar</a>
             <div class="modal fade" role="dialog" aria-hidden="true" id="id_alumnos_<?= $row->id_alumnos ?>">

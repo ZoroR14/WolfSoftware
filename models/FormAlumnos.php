@@ -6,7 +6,7 @@ use yii\base\model;
 
 class FormAlumnos extends model{
 
-public $id_alumno;
+public $id_alumnos;
 public $nombres;
 public $apellidos;
 public $clase;
@@ -15,7 +15,7 @@ public $nota_final;
 public function rules()
  {
   return [
-   ['id_alumno', 'integer', 'message' => 'Id incorrecto'],
+   ['id_alumnos', 'integer', 'message' => 'Id incorrecto'],
    ['nombres', 'required', 'message' => 'Campo requerido'],
    ['nombres', 'match', 'pattern' => '/^[a-záéíóúñ\s]+$/i', 'message' => 'Sólo se aceptan letras'],
    ['nombres', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Mínimo 3 máximo 50 caracteres'],
