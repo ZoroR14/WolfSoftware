@@ -175,9 +175,9 @@ class PruebaController extends Controller
     }
   
     // Prueba del domingo //
-    public function actionIndex()
+    public function actionIndex($bienvenida = "Este es el inicio del proyecto")
     {
-        return $this->render('index', ['mensaje_bienvenida'=>"Este es el inicio del proyecto"]
+        return $this->render('index', ['mensaje_bienvenida'=>$bienvenida]
                 );
     }
    }
