@@ -16,9 +16,39 @@ use app\models\FormAlumnos;
 use app\models\Alumnos;
 use app\models\FormSearch;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 class PruebaController extends Controller
 {
+    public function actionDelete()
+    {
+        if(Yii::$app->request->post())
+        {
+            $id_alumnos = Html::encode($_POST["id_alumnos"]);
+            if((int) $id_alumnos)
+            {
+                if(Alumnos::deleteAll("id_alumnos=:id_alumnos", [":id_alumnos" => $id_alumnos]))
+                {
+                    echo "Alumno con id $id_alumnos eliminado con éxito, redireccionando ...";
+                    echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("prueba/view")."'>";
+                }
+                else
+                {
+                    echo "Ha ocurrido un error al eliminar el alumno, redireccionando ...";
+                    echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("prueba/view")."'>"; 
+                }
+            }
+            else
+            {
+                echo "Ha ocurrido un error al eliminar el alumno, redireccionando ...";
+                echo "<meta http-equiv='refresh' content='3; ".Url::toRoute("prueba/view")."'>";
+            }
+        }
+        else
+        {
+            return $this->redirect(["prueba/view"]);
+        }
+    }
   
    public function actionCrear() {
         $model = new FormAlumnos;

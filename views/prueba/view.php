@@ -44,7 +44,29 @@ use yii\widgets\ActiveForm;
         <td><?= $row->clase ?></td>
         <td><?= $row->nota_final ?></td>
         <td><a href="#">Editar</a></td>
-        <td><a href="#">Eliminar</a></td>
+        <td>
+            <a href="#" data-toggle="modal" data-target="#id_alumnos_<?= $row->id_alumnos ?>">Eliminar</a>
+            <div class="modal fade" role="dialog" aria-hidden="true" id="id_alumnos_<?= $row->id_alumnos ?>">
+                      <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title">Eliminar alumno</h4>
+                              </div>
+                              <div class="modal-body">
+                                    <p>¿Realmente deseas eliminar al alumno con id <?= $row->id_alumnos ?>?</p>
+                              </div>
+                              <div class="modal-footer">
+                              <?= Html::beginForm(Url::toRoute("prueba/delete"), "POST") ?>
+                                    <input type="hidden" name="id_alumnos" value="<?= $row->id_alumnos ?>">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                              <?= Html::endForm() ?>
+                              </div>
+                            </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </td>
     </tr>
     <?php endforeach ?>
 </table>
