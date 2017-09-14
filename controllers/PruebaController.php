@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 use yii\web\Response;
 use app\models\FormAlumnos;
 use app\models\Alumnos;
+use app\models\FormSearch;
+use yii\helpers\Html;
 
 class PruebaController extends Controller
 {
@@ -55,7 +57,23 @@ class PruebaController extends Controller
     {
         $table = new Alumnos;
         $model = $table->find()->all();
-        return $this->render("view", ["model" => $model]);
+        $form = new FormSearch;
+        $search = null;
+       if($form->load(Yii::$app->request->get()))
+        {
+            if ($form->validate())
+            {
+                $search = Html::encode($form->q);
+                $query = "SELECT * FROM alumnos WHERE id_alumnos LIKE '%$search%' OR ";
+                $query .= "nombres LIKE '%$search%' OR apellidos LIKE '%$search%'";
+                $model = $table->findBySql($query)->all();
+            }
+            else
+            {
+                $form->getErrors();
+            }
+        }
+         return $this->render("view", ["model" => $model, "form" => $form, "search" => $search]);
     }
   
     // Prueba del domingo //
